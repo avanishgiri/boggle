@@ -2,8 +2,8 @@
   width: 600px;
 }
 .square {
-  width: 10%;
-  height: 10%;
+  width: 65px;
+  height: 65px;
   border: 1px solid black;
   float: left;
   font-size: 40px;
@@ -26,4 +26,8 @@
   border: 1px solid black;
   font-size: 48px;
   clear: left;
+}
+
+.clicked {
+  background-color: beige;
 }
