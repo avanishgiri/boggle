@@ -1,6 +1,10 @@
 .container {
-  width: 600px;
+  width: 300px;
+  height: 300px;
+  background-color: #eef;
+  margin: 0 auto;
 }
+
 .square {
   width: 65px;
   height: 65px;
@@ -8,11 +12,20 @@
   float: left;
   font-size: 40px;
   text-align: center;
+  font-family: sans-serif;
+  line-height: 65px;
+  background-color: #fffffd;
+  border-radius: 10px;
 }
 
+
+#shake {
+  float: right;
+}
 .row {
-  width: 100%;
+  width: 270px;
   clear: left;
+  margin: 0 auto;
 }
 
 .square:hover {
@@ -31,3 +44,10 @@
 .clicked {
   background-color: beige;
 }
+
+.embossed {
+    -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -2px 0 rgba(0,0,0,.25), inset 0 -3px 0 rgba(255,255,255,.2), 0 1px 0 rgba(0,0,0,.1);
+    -moz-box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -2px 0 rgba(0,0,0,.25), inset 0 -3px 0 rgba(255,255,255,.2), 0 1px 0 rgba(0,0,0,.1);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.5), inset 0 -2px 0 rgba(0,0,0,.25), inset 0 -3px 0 rgba(255,255,255,.2), 0 1px 0 rgba(0,0,0,.1);
+}
+
