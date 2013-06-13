@@ -1,3 +1,30 @@
+
+// function Board() {} // responsible for which dice are where
+
+// function Game() {   // responsible for game rules
+//   //this.renderer = new DOMRenderer();
+//   this.renderer = new ConsoleRenderer();
+//   this.validNextClicks = [];
+//   this.clickedDice = [];
+// }
+// Game.prototype = {
+//   onClick: function(position) { // position == the die # that was clicked
+//     // figure out how to display neighbors
+//     // ignore clicks from non-neighbors
+//   }
+// }
+
+// function DOMRenderer() {}  // responsible for rendering table cells
+// function ConsoleRenderer() {}  // responsible for rendering in console using text
+
+
+
+
+
+
+
+//------------------------------------------------
+
 DICE = [
 "AAEEGN",
 "ELRTTY",
@@ -59,6 +86,10 @@ function BoggleBoard(){
     }
   };
 
+  this.neighborsForPosition = function() {
+
+  };
+
   this.shake = function(){
     var letters = [];
     DICE.shuffle().forEach(function(die){
@@ -75,6 +106,11 @@ var currentIndex = [];
 var neighbors;
 
 function renderBoard(board){
+  // for (var i=0; i<4; i++) {
+  //   for (var j=0; j<4; j++) {
+  //     $('.row').eq(i).find('.square').eq(j).html(board.letters[i*4+j]);
+  //   }
+  // }
   $('.clicked').each(function(){
     $(this).off("click");
     bindFirstClick($(this),$('.square').toArray().indexOf($(this).get(0)));
@@ -182,5 +218,16 @@ $(document).ready(function(){
 
   $('#clear').click(function(){
     renderBoard(board);
+  });
+
+  $('#submit').on("click", function(){
+    $.ajax({
+      url: '/check_word',
+      type: 'get',
+      data: "word=" + $('#answer').text()
+    }).done(function(response){
+      if(response.correct)
+        renderBoard(board);
+    });
   });
 });
