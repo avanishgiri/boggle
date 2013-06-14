@@ -16,13 +16,6 @@
 
 // function DOMRenderer() {}  // responsible for rendering table cells
 // function ConsoleRenderer() {}  // responsible for rendering in console using text
-
-
-
-
-
-
-
 //------------------------------------------------
 
 DICE = [
