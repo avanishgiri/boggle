@@ -29,7 +29,7 @@ DICE = [
 "EIOSST",
 "DELRVY",
 "ACHOPS",
-['H','I','M','N','U','Qu'],
+['H','I','M','N','U','QU'],
 "EEINSU",
 "EEGHNW",
 "AFFKPS",
@@ -79,10 +79,6 @@ function BoggleBoard(){
     }
   };
 
-  this.neighborsForPosition = function() {
-
-  };
-
   this.shake = function(){
     var letters = [];
     DICE.shuffle().forEach(function(die){
@@ -99,11 +95,6 @@ var currentIndex = [];
 var neighbors;
 
 function renderBoard(board){
-  // for (var i=0; i<4; i++) {
-  //   for (var j=0; j<4; j++) {
-  //     $('.row').eq(i).find('.square').eq(j).html(board.letters[i*4+j]);
-  //   }
-  // }
   $('.clicked').each(function(){
     $(this).off("click");
     bindFirstClick($(this),$('.square').toArray().indexOf($(this).get(0)));
@@ -112,12 +103,11 @@ function renderBoard(board){
     $(this).html(board.letters[i]);
     $(this).removeClass("clicked");
     $(this).removeClass("neighbor");
-    $('#answer').text("");
+    $('#answer').val("");
   });
   currentEntry = [];
   currentIndex = [];
 }
-
 
 function setNeighbors($square, index){
     var rows = $('.square').toArray().each_slice(4);
@@ -147,7 +137,7 @@ function bindSecondClick($square){
       $(neighbors[currentIndex[currentIndex.length-1]]).removeClass("neighbor");
       currentIndex = currentIndex.slice(0,currentIndex.length-1);
       $(neighbors[currentIndex[currentIndex.length-1]]).addClass("neighbor");
-      $('#answer').html(getText(currentEntry));
+      $('#answer').val(getText(currentEntry));
       $square.removeClass("clicked");
       bindFirstClick($square,$('.square').toArray().indexOf($square.get(0)));
     }
@@ -189,7 +179,7 @@ function bindFirstClick($square, index){
       $square.addClass("clicked");
       currentEntry.push($square.get(0));
       currentIndex.push(index);
-      $('#answer').html(getText(currentEntry));
+      $('#answer').val(getText(currentEntry));
       bindSecondClick($square);
     }
     else{
@@ -213,14 +203,46 @@ $(document).ready(function(){
     renderBoard(board);
   });
 
-  $('#submit').on("click", function(){
+  $('#send_word').on("click", function(){
+    console.log('helltere');
     $.ajax({
       url: '/check_word',
       type: 'get',
-      data: "word=" + $('#answer').text()
+      dataType: 'json',
+      data: "word=" + $('#answer').val()
     }).done(function(response){
+      console.log(response);
       if(response.correct)
+      {
         renderBoard(board);
+      };
     });
   });
+
+  $('input').on("keyup",function(){
+
+  });
+
+  var interval = setInterval(function() {
+    var timer = $('.timer').html();
+    timer = timer.split(':');
+    var minutes = parseInt(timer[0], 10);
+    var seconds = parseInt(timer[1], 10);
+    seconds -= 1;
+    if (minutes < 0) return clearInterval(interval);
+    if (minutes < 10 && minutes.length != 2) minutes = '0' + minutes;
+    if (seconds < 0 && minutes != 0) {
+        minutes -= 1;
+        seconds = 59;
+    }
+    else if (seconds < 10 && length.seconds != 2) seconds = '0' + seconds;
+    $('.timer').html(minutes + ':' + seconds);
+    
+    if (minutes == 0 && seconds == 0)
+    {
+        $('#end-game').show();
+        clearInterval(interval);
+    }
+  }, 1000);
+
 });

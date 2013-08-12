@@ -4,6 +4,8 @@ end
 
 get '/check_word' do
   content_type :json
-  word = Word.find_by_word(params[:word])
-  word ? {correct: true} : {correct: false}
+  p params
+  word = Word.find_by_word(params[:word].downcase)
+  p word
+  word ? {correct: true}.to_json : {correct: false}.to_json
 end

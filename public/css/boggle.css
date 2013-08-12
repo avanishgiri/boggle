@@ -18,6 +18,12 @@
   border-radius: 10px;
 }
 
+.timer {
+  color: red;
+  font-size: 30px;
+  float: right;
+}
+
 * {
   font-family: sans-serif;
 }
