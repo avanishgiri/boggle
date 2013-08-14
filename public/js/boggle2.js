@@ -240,8 +240,19 @@ $(document).ready(function(){
     
     if (minutes == 0 && seconds == 0)
     {
+        $('button').off('click');
+        $('.square').off('click');
         $('#end-game').show();
+        $('#end-game > button').on("click",function(){
+          location.reload();
+        })
         clearInterval(interval);
+        $.ajax({
+          url: '/get_score',
+          type: 'get'
+        }).done(function(response){
+          $('#score').html("You scored " + response + " points");
+        });
     }
   }, 1000);
 
